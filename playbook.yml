@@ -6,3 +6,4 @@
     - { role: locale, when: locale is defined }
     - { role: timezone, when: timezone is defined }
     - { role: swap, when: swap is defined }
+    - { role: ssh, when: ssh is defined }

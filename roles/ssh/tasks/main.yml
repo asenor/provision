@@ -1,0 +1,9 @@
+---
+- name: Enable Forward Agent
+  become: true
+  lineinfile:
+    dest: '/etc/ssh/ssh_config'
+    regexp: '#(\s*)ForwardAgent.*'
+    line: ' \1ForwardAgent yes'
+    backrefs: yes
+  when: ssh.enable_forward_agent

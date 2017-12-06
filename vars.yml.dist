@@ -6,3 +6,5 @@ swap:
   settings:
     - { key: vm.swappiness, value: 10 }
     - { key: vm.vfs_cache_pressure, value: 50 }
+ssh:
+  enable_forward_agent: true
