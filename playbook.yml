@@ -9,3 +9,4 @@
     - { role: ssh, when: ssh is defined }
     - { role: packages, when: packages is defined }
     - { role: mysql, when: mysql is defined }
+    - { role: php, when: php is defined }
