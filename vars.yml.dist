@@ -9,3 +9,8 @@ swap:
 ssh:
   enable_forward_agent: true
 packages: []
+mysql:
+  packages: [mariadb-client, mariadb-server, python-mysqldb]
+  databases: [test]
+  users:
+    - { name: test, password: test, database: test}

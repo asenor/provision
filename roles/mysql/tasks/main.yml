@@ -1,0 +1,25 @@
+---
+- name: Install packages
+  become: true
+  apt:
+    name: '{{ item }}'
+    update_cache: true
+  with_items: '{{ mysql.packages }}'
+  when: mysql.packages is defined
+
+- name: Create databases
+  become: true
+  mysql_db:
+    name: '{{ item }}'
+    encoding: utf8
+  with_items: '{{ mysql.databases }}'
+  when: mysql.databases is defined
+
+- name: Create users
+  become: true
+  mysql_user:
+    name: '{{ item.user }}'
+    password: '{{ item.password }}'
+    priv: '{{ item.database }}.*:ALL'
+  with_items: '{{ mysql.users }}'
+  when: mysql.users is defined
