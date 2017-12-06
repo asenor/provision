@@ -22,4 +22,7 @@ Vagrant.configure('2') do |config|
         node.vm.network :private_network, ip: '192.168.21.21', nic_type: 'virtio'
         node.vm.hostname = 'provision.dev'
     end
+
+    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+    config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> /home/ubuntu/.ssh/authorized_keys", privileged: false
 end

@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars_files:
+    - vars.yml
+  roles:
+    - { role: locale, when: locale is defined }
+    - { role: timezone, when: timezone is defined }
+    - { role: swap, when: swap is defined }

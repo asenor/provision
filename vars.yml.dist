@@ -1,0 +1,8 @@
+---
+locale: es_ES.UTF-8
+timezone: Europe/Madrid
+swap:
+  size: 1024M
+  settings:
+    - { key: vm.swappiness, value: 10 }
+    - { key: vm.vfs_cache_pressure, value: 50 }

@@ -1,0 +1,16 @@
+---
+- name: Install locales package
+  become: true
+  apt:
+    name: locales
+
+- name: Create locale
+  become: true
+  locale_gen:
+    name: '{{ locale }}'
+
+- name: Configure locale
+  become: true
+  template:
+    src: locale
+    dest: /etc/default/locale
