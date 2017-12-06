@@ -7,3 +7,4 @@
     - { role: timezone, when: timezone is defined }
     - { role: swap, when: swap is defined }
     - { role: ssh, when: ssh is defined }
+    - { role: packages, when: packages is defined }
