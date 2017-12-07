@@ -1,6 +1,6 @@
 # Provision
 
-## Configuration
+## Configuration
 
 Create vars.yml and inventory:
 
@@ -11,7 +11,7 @@ cp inventory.dist inventory
 
 Edit both files to meet your needs.
 
-## Run
+## Run
 
 ```
 ansible-playbook playbook.yml
