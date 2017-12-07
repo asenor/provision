@@ -24,3 +24,21 @@
   with_items: '{{ php.extras }}'
   when: php.extras is defined
   notify: Restart php-fpm
+
+- name: Disable xdebug on php-fpm
+  become: true
+  command: phpdismod xdebug
+  args:
+    removes: '/etc/php/{{ php.version }}/fpm/conf.d/20-xdebug.ini'
+  notify: Restart php-fpm
+
+- name: Modify php settings
+  become: true
+  lineinfile:
+    dest: '/etc/php/{{ php.version }}/{{ item[0] }}/php.ini'
+    regexp: ';?{{ item[1].setting }} ?=.*'
+    line: '{{ item[1].setting }} = {{ item[1].value }}'
+  with_nested:
+    - [fpm, cli]
+    - '{{ php.settings }}'
+  notify: Restart php-fpm

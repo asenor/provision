@@ -18,3 +18,12 @@ php:
   version: 7.1
   extensions: [bz2, curl, gd, intl, mbstring, mcrypt, mysql, xml, zip]
   extras: [apcu, apcu-bc]
+  settings:
+    - { setting: date.timezone, value: Europe/Madrid }
+    - { setting: post_max_size, value: 64M }
+    - { setting: realpath_cache_size, value: 5M }
+    - { setting: realpath_cache_ttl, value: 7200 }
+    - { setting: upload_max_filesize, value: 20M }
+    - { setting: opcache.enable, value: 1 }
+    - { setting: opcache.max_accelerated_files, value: 20000 }
+    - { setting: opcache.revalidate_path, value: 1 }
