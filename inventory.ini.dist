@@ -1,5 +1,0 @@
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
-
-[vagrant]
-192.168.21.21 ansible_user=ubuntu

@@ -24,5 +24,5 @@ Vagrant.configure('2') do |config|
     end
 
     ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
-    config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> /home/ubuntu/.ssh/authorized_keys", privileged: false
+    config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> $HOME/.ssh/authorized_keys", privileged: false
 end

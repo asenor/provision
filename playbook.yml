@@ -2,6 +2,13 @@
 - hosts: all
   vars_files:
     - vars.yml
+  gather_facts: false
+  pre_tasks:
+    - name: Ensure python is installed
+      become: true
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      changed_when: false
+    - setup: # gather_facts
   roles:
     - { role: locale, when: locale is defined }
     - { role: timezone, when: timezone is defined }

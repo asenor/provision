@@ -10,10 +10,10 @@ ssh:
   enable_forward_agent: true
 packages: []
 mysql:
-  packages: [mariadb-client, mariadb-server, python3-mysqldb]
+  packages: [mariadb-client, mariadb-server, python-mysqldb]
   databases: [test]
   users:
-    - { user: test, password: test, database: test}
+    - { user: test, password: test, database: test }
 php:
   version: 7.1
   extensions: [bz2, curl, gd, intl, mbstring, mcrypt, mysql, xml, zip]
