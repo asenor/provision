@@ -2,11 +2,11 @@
 
 ## Configuration
 
-Create vars.yml and inventory:
+Create vars.yml and hosts:
 
 ```
 cp vars.yml.dist vars.yml
-cp inventory.dist inventory
+cp hosts.dist hosts
 ```
 
 Edit both files to meet your needs.
