@@ -29,3 +29,8 @@ php:
     - { setting: opcache.revalidate_path, value: 1 }
 nginx:
   remove_default_vhost: true
+  vhosts:
+    - listen: 80
+      server_name: provision.local
+      root: /var/www/html
+      index: index.nginx-debian.html

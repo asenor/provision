@@ -5,7 +5,14 @@
     name: nginx
     state: latest
 
-- name: Remove default nginx site
+- name: Configure nginx
+  become: true
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: Restart nginx
+
+- name: Remove default vhost
   become: true
   file:
     path: '{{ item }}'
@@ -14,4 +21,23 @@
     - /etc/nginx/sites-enabled/default
     - /etc/nginx/sites-available/default
   when: nginx.remove_default_vhost
+  notify: Restart nginx
+
+- name: Configure vhosts
+  become: true
+  template:
+    src: vhost.conf
+    dest: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen }}.conf'
+  with_items: '{{ nginx.vhosts }}'
+  when: nginx.vhosts is defined
+  notify: Restart nginx
+
+- name: Enable vhosts
+  become: true
+  file:
+    src: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen }}.conf'
+    dest: '/etc/nginx/sites-enabled/{{ item.server_name }}.{{ item.listen }}.conf'
+    state: link
+  with_items: '{{ nginx.vhosts }}'
+  when: nginx.vhosts is defined
   notify: Restart nginx
