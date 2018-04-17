@@ -1,0 +1,17 @@
+---
+- name: Install nginx
+  become: true
+  apt:
+    name: nginx
+    state: latest
+
+- name: Remove default nginx site
+  become: true
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - /etc/nginx/sites-enabled/default
+    - /etc/nginx/sites-available/default
+  when: nginx.remove_default_vhost
+  notify: Restart nginx
