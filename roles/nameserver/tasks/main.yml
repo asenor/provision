@@ -1,0 +1,7 @@
+---
+- name: Configure nameserver
+  become: true
+  template:
+    src: base
+    dest: /etc/resolvconf/resolv.conf.d/base
+  notify: Restart resolvconf

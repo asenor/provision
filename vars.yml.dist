@@ -8,6 +8,7 @@ swap:
     - { setting: vm.vfs_cache_pressure, value: 50 }
 ssh:
   enable_forward_agent: true
+nameserver: 1.1.1.1 1.0.0.1
 packages: [zip]
 mysql:
   packages: [mariadb-client, mariadb-server, python-mysqldb]

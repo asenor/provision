@@ -1,0 +1,7 @@
+---
+- name: Restart resolvconf
+  become: true
+  service:
+    name: resolvconf
+    enabled: yes
+    state: restarted
