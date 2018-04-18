@@ -9,7 +9,7 @@ swap:
 ssh:
   enable_forward_agent: true
 nameserver: 1.1.1.1 1.0.0.1
-packages: [zip]
+packages: [git, zip, unzip]
 mysql:
   packages: [mariadb-client, mariadb-server, python-mysqldb]
   databases: [test]
