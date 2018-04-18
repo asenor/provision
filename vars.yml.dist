@@ -8,7 +8,7 @@ swap:
     - { setting: vm.vfs_cache_pressure, value: 50 }
 ssh:
   enable_forward_agent: true
-packages: []
+packages: [zip]
 mysql:
   packages: [mariadb-client, mariadb-server, python-mysqldb]
   databases: [test]
@@ -27,3 +27,5 @@ php:
     - { setting: opcache.enable, value: 1 }
     - { setting: opcache.max_accelerated_files, value: 20000 }
     - { setting: opcache.revalidate_path, value: 1 }
+users:
+  - { name: test, password: test, generate_ssh_key: true, groups: sudo }
