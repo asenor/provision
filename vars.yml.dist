@@ -17,8 +17,7 @@ mysql:
     - { user: test, password: test, database: test }
 php:
   version: 7.1
-  extensions: [bz2, curl, gd, intl, mbstring, mcrypt, mysql, xml, zip]
-  extras: [apcu, apcu-bc]
+  extensions: [apcu, bz2, curl, gd, intl, mbstring, mcrypt, mysql, xml, zip]
   settings:
     - { setting: date.timezone, value: Europe/Madrid }
     - { setting: post_max_size, value: 64M }
