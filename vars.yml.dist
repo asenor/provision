@@ -30,3 +30,5 @@ php:
     - { setting: opcache.revalidate_path, value: 1 }
 users:
   - { name: test, password: test, generate_ssh_key: true, groups: sudo }
+cronjobs:
+  - { job: 'echo "Test" >> /dev/null 2>&1', name: 'Test', user: 'test', minute: 0, hour: 0, day: '*', month: '*', weekday: '*' }

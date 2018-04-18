@@ -19,3 +19,4 @@
     - { role: mysql, when: mysql is defined }
     - { role: php, when: php is defined }
     - { role: users, when: users is defined }
+    - { role: cronjobs, when: cronjobs is defined }
