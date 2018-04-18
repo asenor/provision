@@ -27,7 +27,7 @@
   become: true
   template:
     src: vhost.conf
-    dest: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen }}.conf'
+    dest: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen.split(' ')[0] }}.conf'
   with_items: '{{ nginx.vhosts }}'
   when: nginx.vhosts is defined
   notify: Restart nginx
