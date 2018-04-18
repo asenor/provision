@@ -27,6 +27,11 @@ php:
     - { setting: opcache.enable, value: 1 }
     - { setting: opcache.max_accelerated_files, value: 20000 }
     - { setting: opcache.revalidate_path, value: 1 }
+certbot:
+  renew_hour: 4
+  renew_minute: 21
+  certificates:
+    - { email: test@example.com, domains: [example.com, www.example.com] }
 users:
   - { name: test, password: test, generate_ssh_key: true, groups: sudo }
 cronjobs:

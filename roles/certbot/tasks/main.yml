@@ -8,3 +8,18 @@
   become: true
   apt:
     name: python-certbot-nginx
+
+- name: Generate certificates
+  become: true
+  command: "certbot certonly --nginx --noninteractive --agree-tos --no-eff-email --email {{ item.email }} --domains {{ item.domains|join(',') }}"
+  with_items: '{{ certbot.certificates }}'
+  when: certbot.certificates is defined
+
+- name: Create cronjob to renew certificates
+  become: true
+  cron:
+    job: certbot renew --quiet
+    name: Renew certificates
+    minute: '{{ certbot.renew_minute }}'
+    hour: '{{ certbot.renew_hour }}'
+  when: certbot.certificates is defined
