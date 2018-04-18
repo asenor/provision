@@ -4,6 +4,7 @@
   user:
     name: '{{ item.name }}'
     password: "{{ item.password|default('')|password_hash('sha512') }}"
+    update_password: on_create
     groups: "{{ item.groups|default('') }}"
     append: '{{ item.append|default(true) }}'
     generate_ssh_key: '{{ item.generate_ssh_key|default(false) }}'
