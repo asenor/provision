@@ -7,11 +7,11 @@
 - name: Install certbot
   become: true
   apt:
-    name: python-certbot-nginx
+    name: certbot
 
 - name: Generate certificates
   become: true
-  command: "certbot certonly --nginx --noninteractive --agree-tos --no-eff-email --email {{ item.email }} --domains {{ item.domains|join(',') }}"
+  command: "certbot certonly --standalone --noninteractive --agree-tos --no-eff-email --email {{ item.email }} --domains {{ item.domains|join(',') }}"
   with_items: '{{ certbot.certificates }}'
   when: certbot.certificates is defined
 

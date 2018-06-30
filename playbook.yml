@@ -19,6 +19,6 @@
     - { role: packages, when: packages is defined }
     - { role: mysql, when: mysql is defined }
     - { role: php, when: php is defined }
-    - { role: nginx, when: nginx is defined }
     - { role: certbot, when: certbot is defined }
+    - { role: nginx, when: nginx is defined }
     - { role: cronjobs, when: cronjobs is defined }

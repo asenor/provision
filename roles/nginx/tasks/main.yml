@@ -27,7 +27,7 @@
   become: true
   template:
     src: vhost.conf
-    dest: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen.split(' ')[0] }}.conf'
+    dest: "/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen.split(' ')[0] }}.conf"
   with_items: '{{ nginx.vhosts }}'
   when: nginx.vhosts is defined
   notify: Restart nginx
@@ -35,8 +35,8 @@
 - name: Enable vhosts
   become: true
   file:
-    src: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen }}.conf'
-    dest: '/etc/nginx/sites-enabled/{{ item.server_name }}.{{ item.listen }}.conf'
+    src: "/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen.split(' ')[0] }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ item.server_name }}.{{ item.listen.split(' ')[0] }}.conf"
     state: link
   with_items: '{{ nginx.vhosts }}'
   when: nginx.vhosts is defined
