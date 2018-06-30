@@ -1,0 +1,43 @@
+---
+- name: Install nginx
+  become: true
+  apt:
+    name: nginx
+    state: latest
+
+- name: Configure nginx
+  become: true
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: Restart nginx
+
+- name: Remove default vhost
+  become: true
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items:
+    - /etc/nginx/sites-enabled/default
+    - /etc/nginx/sites-available/default
+  when: nginx.remove_default_vhost
+  notify: Restart nginx
+
+- name: Configure vhosts
+  become: true
+  template:
+    src: vhost.conf
+    dest: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen.split(' ')[0] }}.conf'
+  with_items: '{{ nginx.vhosts }}'
+  when: nginx.vhosts is defined
+  notify: Restart nginx
+
+- name: Enable vhosts
+  become: true
+  file:
+    src: '/etc/nginx/sites-available/{{ item.server_name }}.{{ item.listen }}.conf'
+    dest: '/etc/nginx/sites-enabled/{{ item.server_name }}.{{ item.listen }}.conf'
+    state: link
+  with_items: '{{ nginx.vhosts }}'
+  when: nginx.vhosts is defined
+  notify: Restart nginx

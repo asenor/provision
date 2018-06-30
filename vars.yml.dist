@@ -6,6 +6,8 @@ swap:
   settings:
     - { setting: vm.swappiness, value: 10 }
     - { setting: vm.vfs_cache_pressure, value: 50 }
+users:
+  - { name: test, password: test, generate_ssh_key: true, groups: sudo }
 ssh:
   enable_forward_agent: true
 nameserver: 1.1.1.1 1.0.0.1
@@ -27,7 +29,16 @@ php:
     - { setting: opcache.enable, value: 1 }
     - { setting: opcache.max_accelerated_files, value: 20000 }
     - { setting: opcache.revalidate_path, value: 1 }
-users:
-  - { name: test, password: test, generate_ssh_key: true, groups: sudo }
+nginx:
+  remove_default_vhost: true
+  vhosts:
+    - listen: 80
+      server_name: provision.local
+      redirect: https://provision.local
+    - listen: 443
+      server_name: provision.local
+      root: /var/www/html
+      index: index.nginx-debian.html
+      cache_assets: true
 cronjobs:
   - { job: 'echo "Test" >> /dev/null 2>&1', name: 'Test', user: 'test', minute: 0, hour: 0, day: '*', month: '*', weekday: '*' }

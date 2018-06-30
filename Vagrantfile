@@ -20,7 +20,7 @@ Vagrant.configure('2') do |config|
     config.vm.define 'provision-vm' do |node|
         node.vm.box = 'ubuntu/xenial64'
         node.vm.network :private_network, ip: '192.168.21.21', nic_type: 'virtio'
-        node.vm.hostname = 'provision.dev'
+        node.vm.hostname = 'provision.local'
     end
 
     ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
