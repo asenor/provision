@@ -34,3 +34,19 @@
     - [fpm, cli]
     - '{{ php.settings }}'
   notify: Restart php-fpm
+
+- name: Remove default php-fpm pool
+  become: true
+  file:
+    path: '/etc/php/{{ php.version }}/fpm/pool.d/www.conf'
+    state: absent
+  when: php.fpm_pools is defined
+  notify: Restart php-fpm
+
+- name: Create php-fpm pools
+  become: true
+  template:
+    src: fpm-pool.conf
+    dest: '/etc/php/{{ php.version }}/fpm/pool.d/{{ item.name }}.conf'
+  with_items: '{{ php.fpm_pools }}'
+  when: php.fpm_pools is defined
