@@ -29,6 +29,9 @@ php:
     - { setting: opcache.enable, value: 1 }
     - { setting: opcache.max_accelerated_files, value: 20000 }
     - { setting: opcache.revalidate_path, value: 1 }
+composer:
+  packages:
+    - { package: hirak/prestissimo }
 nginx:
   remove_default_vhost: true
   vhosts:

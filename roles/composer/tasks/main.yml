@@ -12,8 +12,12 @@
 
 - name: Update composer
   command: composer self-update
+  register: composer_update
+  changed_when: "'Updating to version' in composer_update.stdout"
 
 - name: Install global composer packages
   command: "composer global require {{ item.package }}:{{ item.version|default('@stable') }}"
+  args:
+    creates: '{{ ansible_env.HOME }}/.config/composer/vendor/{{ item.package }}/composer.json'
   with_items: '{{ composer.packages }}'
   when: composer.packages is defined
