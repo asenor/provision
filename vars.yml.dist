@@ -7,7 +7,7 @@ swap:
     - { setting: vm.swappiness, value: 10 }
     - { setting: vm.vfs_cache_pressure, value: 50 }
 users:
-  - { name: test, password: test, generate_ssh_key: true, groups: sudo }
+  - { name: test, password: test, generate_ssh_key: true, groups: 'sudo,www-data' }
 ssh:
   enable_forward_agent: true
 nameserver: 1.1.1.1 1.0.0.1
