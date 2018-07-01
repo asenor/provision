@@ -1,0 +1,27 @@
+- name: Check if certificate exists
+  stat:
+    path: '/etc/letsencrypt/live/{{ certificate.domains|first }}/fullchain.pem'
+  register: certificate_file
+
+- name: Stop services
+  become: true
+  service:
+    name: '{{ item }}'
+    state: stopped
+  with_items: '{{ certbot.stop_services }}'
+  when: certbot.stop_services is defined and not certificate_file.stat.exists
+
+- name: Generate certificate
+  become: true
+  command: "certbot certonly --standalone --noninteractive --agree-tos --no-eff-email --email {{ certificate.email }} --domains {{ certificate.domains|join(',') }}"
+  args:
+    creates: '/etc/letsencrypt/live/{{ certificate.domains|first }}/fullchain.pem'
+  when: not certificate_file.stat.exists
+
+- name: Start services
+  become: true
+  service:
+    name: '{{ item }}'
+    state: started
+  with_items: '{{ certbot.stop_services }}'
+  when: certbot.stop_services is defined and not certificate_file.stat.exists

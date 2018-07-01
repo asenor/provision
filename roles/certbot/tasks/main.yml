@@ -9,11 +9,10 @@
   apt:
     name: certbot
 
-- name: Generate certificates
-  become: true
-  command: "certbot certonly --standalone --noninteractive --agree-tos --no-eff-email --email {{ item.email }} --domains {{ item.domains|join(',') }}"
+- include_tasks: generate-certificate.yml
   with_items: '{{ certbot.certificates }}'
-  when: certbot.certificates is defined
+  loop_control:
+    loop_var: certificate
 
 - name: Create cronjob to renew certificates
   become: true

@@ -44,9 +44,10 @@ nginx:
       # ssl_certificate_key: /etc/letsencrypt/live/provision.local/privkey.pem
       # ssl_trusted_certificate: /etc/letsencrypt/live/provision.local/fullchain.pem
 certbot:
+  stop_services: nginx
+  certificates:
+      - { email: test@example.com, domains: [example.com, www.example.com] }
   renew_hour: 4
   renew_minute: 21
-  certificates:
-    - { email: test@example.com, domains: [example.com, www.example.com] }
 cronjobs:
   - { job: 'echo "Test" >> /dev/null 2>&1', name: 'Test', user: 'test', minute: 0, hour: 0, day: '*', month: '*', weekday: '*' }
