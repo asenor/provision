@@ -7,5 +7,6 @@
     update_password: on_create
     groups: "{{ item.groups|default('') }}"
     append: '{{ item.append|default(true) }}'
+    shell: "{{ item.shell|default('/bin/bash') }}"
     generate_ssh_key: '{{ item.generate_ssh_key|default(false) }}'
   with_items: '{{ users }}'
