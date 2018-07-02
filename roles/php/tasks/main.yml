@@ -50,3 +50,4 @@
     dest: '/etc/php/{{ php.version }}/fpm/pool.d/{{ item.name }}.conf'
   with_items: '{{ php.fpm_pools }}'
   when: php.fpm_pools is defined
+  notify: Restart php-fpm
