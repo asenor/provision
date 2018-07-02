@@ -33,6 +33,8 @@ php:
     - name: www
       user: www-data
       group: www-data
+      listen_owner: www-data
+      listen_group: www-data
       pm: dynamic
       pm_max_children: 10
       pm_start_servers: 2
