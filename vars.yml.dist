@@ -70,9 +70,10 @@ nginx:
       #       fastcgi_split_path_info ^(.+\.php)(/.+)$;
       #       fastcgi_pass unix:/var/run/php/php{{ php.version }}-fpm.www.sock;
       #       fastcgi_index index.php;
+      #       include fastcgi_params;
       #       fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
       #       fastcgi_param DOCUMENT_ROOT $realpath_root;
-      #       include fastcgi_params;
+      #       internal;
       #   }
 # certbot:
 #   stop_service: nginx
