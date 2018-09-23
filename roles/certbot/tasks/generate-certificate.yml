@@ -3,13 +3,12 @@
     path: '/etc/letsencrypt/live/{{ certificate.domains|first }}/fullchain.pem'
   register: certificate_file
 
-- name: Stop services
+- name: Stop service
   become: true
   service:
-    name: '{{ item }}'
+    name: '{{ certbot.stop_service }}'
     state: stopped
-  with_items: '{{ certbot.stop_services }}'
-  when: certbot.stop_services is defined and not certificate_file.stat.exists
+  when: not certificate_file.stat.exists
 
 - name: Generate certificate
   become: true
@@ -18,10 +17,9 @@
     creates: '/etc/letsencrypt/live/{{ certificate.domains|first }}/fullchain.pem'
   when: not certificate_file.stat.exists
 
-- name: Start services
+- name: Start service
   become: true
   service:
-    name: '{{ item }}'
+    name: '{{ certbot.stop_service }}'
     state: started
-  with_items: '{{ certbot.stop_services }}'
-  when: certbot.stop_services is defined and not certificate_file.stat.exists
+  when:  not certificate_file.stat.exists

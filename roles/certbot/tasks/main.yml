@@ -17,7 +17,7 @@
 - name: Create cronjob to renew certificates
   become: true
   cron:
-    job: certbot renew --quiet
+    job: 'certbot renew --quiet --pre-hook "service {{ certbot.stop_service }} stop" --post-hook "service {{ certbot.stop_service }} start"'
     name: Renew certificates
     minute: '{{ certbot.renew_minute }}'
     hour: '{{ certbot.renew_hour }}'
