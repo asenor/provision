@@ -10,3 +10,11 @@
     shell: "{{ item.shell|default('/bin/bash') }}"
     generate_ssh_key: '{{ item.generate_ssh_key|default(false) }}'
   with_items: '{{ users }}'
+
+- name: Add authorized key
+  become: true
+  authorized_key:
+    user: '{{ item.name }}'
+    key: '{{ item.authorized_key }}'
+  when: item.authorized_key
+  with_items: '{{ users }}'
