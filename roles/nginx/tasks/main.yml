@@ -23,6 +23,14 @@
   when: nginx.remove_default_vhost
   notify: Restart nginx
 
+- name: Remove default vhost document root
+  become: true
+  file:
+    path: /var/www/html
+    state: absent
+  when: nginx.remove_default_vhost
+  notify: Restart nginx
+
 - name: Configure vhosts
   become: true
   template:
