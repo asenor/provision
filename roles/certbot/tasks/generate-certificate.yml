@@ -1,4 +1,5 @@
 - name: Check if certificate exists
+  become: true
   stat:
     path: '/etc/letsencrypt/live/{{ certificate.domains|first }}/fullchain.pem'
   register: certificate_file

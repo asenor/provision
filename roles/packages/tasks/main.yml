@@ -2,6 +2,6 @@
 - name: Install packages
   become: true
   apt:
-    name: '{{ item }}'
+    name: '{{ packages }}'
+    state: latest
     update_cache: true
-  with_items: '{{ packages }}'

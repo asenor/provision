@@ -15,5 +15,5 @@
   authorized_key:
     user: '{{ item.name }}'
     key: '{{ item.authorized_key }}'
-  when: item.authorized_key
+  when: item.authorized_key is defined
   with_items: '{{ users }}'

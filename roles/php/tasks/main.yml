@@ -8,11 +8,13 @@
   become: true
   apt:
     name: 'php{{ php.version }}-fpm'
+    state: latest
 
 - name: Install php extensions
   become: true
   apt:
     name: 'php{{ php.version }}-{{ item }}'
+    state: latest
   with_items: '{{ php.extensions }}'
   when: php.extensions is defined
   notify: Restart php-fpm

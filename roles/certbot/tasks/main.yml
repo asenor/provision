@@ -8,6 +8,7 @@
   become: true
   apt:
     name: certbot
+    state: latest
 
 - include_tasks: generate-certificate.yml
   with_items: '{{ certbot.certificates }}'

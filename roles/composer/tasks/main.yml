@@ -11,6 +11,7 @@
     creates: '/usr/local/bin/composer'
 
 - name: Update composer
+  become: true
   command: composer self-update
   register: composer_update
   changed_when: "'Updating to version' in composer_update.stdout"
