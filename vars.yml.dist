@@ -20,8 +20,8 @@ mysql:
   users:
     - { user: test, password: test, database: test }
 php:
-  version: 7.1
-  extensions: [apcu, bz2, curl, gd, intl, mbstring, mcrypt, mysql, xml, zip]
+  version: 7.3
+  extensions: [apcu, bz2, curl, gd, intl, json, mbstring, mysql, xml, zip]
   settings:
     - { setting: date.timezone, value: Europe/Madrid }
     - { setting: expose_php, value: Off }
